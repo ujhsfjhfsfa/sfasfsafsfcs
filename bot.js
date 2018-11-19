@@ -14,36 +14,58 @@ const prefix = "!"
 let done = {};
 
 
-
-
-const games = JSON.parse(fs.readFileSync('games.json', "utf8"));
+let profile = JSON.parse(fs.readFileSync("profile.json", "utf8"))
 client.on("message", message => {
+ 
   if (message.author.bot) return;
-  if (!message.channel.guild) return;
-  if (!games[message.author.id]) games[message.author.id] = {
-    credits: 0,
-    level: 1,
+  if(!message.channel.guild)return;
+  if (!profile[message.author.id]) profile[message.author.id] = {
+    tite: 'Super User',
+    rep: 0,
+    reps: 'NOT YET',
+    lastDaily:'Not Collected',
+    level: 0,
+    points: 0,
+    credits: 150,
   };
-fs.writeFile('./games.json', JSON.stringify(games), (err) => {
+ 
+ 
+fs.writeFile('profile.json', JSON.stringify(profile), (err) => {
 if (err) console.error(err);
-});
+})
 });
 
 client.on("message", (message) => {
-  var sender = message.author
-if(message.content.startsWith(prefix + 'free')) {
-if (games[sender.id].lastDaily != moment().format('day')) {
-    games[sender.id].lastDaily = moment().format('day')
- games[message.author.id].credits += 0.20;
-    message.channel.send(`**${message.author.username} you collect your \`0.20\` :dollar: daily free coins**`)
+  let men = message.mentions.users.first()
+ 
+  if (message.author.bot) return;
+    if (message.author.id === client.user.id) return;
+    if(!message.channel.guild) return;
+if (message.content.startsWith(prefix + 'coins')) {
+  if(men) {
+    if (!profile[men.id]) profile[men.id] = {
+    lastDaily:'Not Collected',
+    credits: 1,
+  };
+  }
+  if(men) {
+message.channel.send(`** ${men.username}, :credit_card: balance` + " is `" + `${profile[men.id].credits}$` + "`.**")
+} else {
+  message.channel.send(`** ${message.author.username}, your :credit_card: balance` + " is `" + `${profile[message.author.id].credits}$` + "`.**")
+}
+}
+ 
+if(message.content.startsWith(prefix + "free")) {
+  if(profile[message.author.id].lastDaily != moment().format('day')) {
+    profile[message.author.id].lastDaily = moment().format('day')
+    profile[message.author.id].credits += 0.2
+     message.channel.send(`**${message.author.username} you collect your \`0.2\` :dollar: daily coins**`)
 } else {
     message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes ${moment().endOf('day').fromNow()}**`)
 }
-}
-})
-
-
-let cont = message.content.slice(prefix.length).split(" ");
+  }
+ 
+ let cont = message.content.slice(prefix.length).split(" ");
 let args = cont.slice(1);
 let sender = message.author
 if(message.content.startsWith(prefix + 'trans')) {
@@ -76,16 +98,6 @@ message.channel.send(`**:moneybag: | ${message.author.username}, has transferrer
 }
  
       });
-
-//مصاري//
-client.on("message", (message) => {
-  if (message.author.bot) return;
-    if (message.author.id === client.user.id) return;
-	if(!message.channel.guild) return;    
-if (message.content === prefix + 'coins') {
-message.channel.send(`** ${message.author.username}, your :credit_card: balance is ${games[message.author.id].credits}.**`)
-}
-});
 
 client.on("message", (message) => {
     /// ALPHA CODES
