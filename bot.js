@@ -16,7 +16,7 @@ let done = {};
 
 
 
-const games = JSON.parse(fs.readFileSync('./games.json', "utf8"));
+const games = JSON.parse(fs.readFileSync('/games.json', "utf8"));
 client.on("message", message => {
   if (message.author.bot) return;
   if (!message.channel.guild) return;
