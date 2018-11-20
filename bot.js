@@ -14,6 +14,20 @@ const prefix = "!"
 let done = {};
 
 
+
+
+client.on ("guildMemberAdd", member => {
+  
+   var role = member.guild.roles.find ("name", "α.м ⇒ мємвєя");
+   member.addRole (role);
+  
+})
+
+client.on ("guildMemberRemove", member => {
+   
+})
+
+
 let profile = JSON.parse(fs.readFileSync("profile.json", "utf8"))
 client.on("message", message => {
  
@@ -61,7 +75,7 @@ if(message.content.startsWith(prefix + "free")) {
     profile[message.author.id].credits += 0.2
      message.channel.send(`**${message.author.username} you collect your \`0.2\` :dollar: daily coins**`)
 } else {
-    message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: credits refreshes ${moment().endOf('day').fromNow()}**`)
+    message.channel.send(`**:stopwatch: | ${message.author.username}, your daily :yen: coins refreshes ${moment().endOf('day').fromNow()}**`)
 }
   }
  
@@ -84,13 +98,13 @@ if(message.content.startsWith(prefix + 'trans')) {
             if (!defineduser) return message.channel.send(`**Usage: ${prefix}trans @someone amount**`);
             var mentionned = message.mentions.users.first();
 if (!profile[sender.id]) profile[sender.id] = {}
-if (!profile[sender.id].credits) profile[sender.id].credits = 200;
+if (!profile[sender.id].credits) profile[sender.id].credits = 0.2;
 fs.writeFile('profile.json', JSON.stringify(profile), (err) => {
 if (err) console.error(err);
 })
       var mando = message.mentions.users.id;
       if  (!profile[defineduser.id]) profile[defineduser.id] = {}
-      if (!profile[defineduser.id].credits) profile[defineduser.id].credits = 200;
+      if (!profile[defineduser.id].credits) profile[defineduser.id].credits = 0.2;
       profile[defineduser.id].credits += (+args[0]);
       profile[sender.id].credits += (-args[0]);
       let mariam = message.author.username
@@ -98,6 +112,16 @@ message.channel.send(`**:moneybag: | ${message.author.username}, has transferrer
 }
  
       });
+
+
+
+client.on("guildMemberAdd", (member) => {
+client.channels.get('514473442787983371').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
+})
+client.on("guildMemberRemove", (member) => {
+client.channels.get('514473442787983371').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
+})
+
 
 client.on("message", (message) => {
     /// ALPHA CODES
