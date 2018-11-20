@@ -131,10 +131,10 @@ message.channel.send(`**:moneybag: | ${message.author.username}, has transferrer
 
 
 client.on("guildMemberAdd", (member) => {
-client.channels.get('514473442787983371').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
+client.channels.get('514485992984543234').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
 })
 client.on("guildMemberRemove", (member) => {
-client.channels.get('514473442787983371').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
+client.channels.get('514485992984543234').edit({name : `『 الأعضاء ↩ ${member.guild.memberCount} 』`});
 })
 
 
