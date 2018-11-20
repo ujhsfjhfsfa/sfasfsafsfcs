@@ -14,7 +14,22 @@ const prefix = "!"
 let done = {};
 
 
-
+client.on('ready', () => {
+    console.log('╔[════════════════════════════════════]╗'); // Heeeeeemo
+    console.log('')
+    console.log('            ╔[════════════]╗')
+    console.log('              Bot Is Online')
+    console.log('            ╚[════════════]╝')
+    console.log('')
+    console.log(`Logged in as ${client.user.tag}!`);
+    console.log('')
+    console.log(`servers! [ " ${client.guilds.size} " ]`);
+    console.log('')
+    console.log(`Users! [ " ${client.users.size} " ]`);
+    console.log('')
+    console.log('╚[════════════════════════════════════]╝')
+          client.user.setActivity("LB CoiN ++",{type: 'PLAYING'});     //Heeeeeemo    
+});
 
 client.on ("guildMemberAdd", member => {
   
