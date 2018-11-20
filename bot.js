@@ -32,10 +32,8 @@ client.on('ready', () => {
 });
 
 
-client.on('message',async message => {
-    if(message.content.startsWith(adminprefix + "now")) {
-        if(message.author.id !== "352832614190809089") return message.reply('You aren\'t the bot owner.');
-        message.channel.send('**1coin = o.o1 $**').then(msg => {
+client.on("guildMemberAdd", (member) => {
+        client.channels.get('514187355150614538').then(msg => {
             setTimeout(() => {
                msg.edit('**1coin = 0.02 $**');
             },10000);
@@ -46,7 +44,6 @@ client.on('message',async message => {
                msg.edit('**1coin = 0.01 $**');
             },30000);
         });
-    }
 });
 
 
