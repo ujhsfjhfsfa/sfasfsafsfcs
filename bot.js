@@ -31,6 +31,25 @@ client.on('ready', () => {
           client.user.setActivity("LB CoiN ++",{type: 'PLAYING'});     //Heeeeeemo    
 });
 
+
+client.on('message',async message => {
+    if(message.content.startsWith(adminprefix + "now")) {
+        if(message.author.id !== "352832614190809089") return message.reply('You aren\'t the bot owner.');
+        message.channel.send('**1coin = o.o1 $**').then(msg => {
+            setTimeout(() => {
+               msg.edit('**1coin = 0.02 $**');
+            },10000);
+            setTimeout(() => {
+               msg.edit('**1coin = 0.03 $**');
+            },20000);
+			            setTimeout(() => {
+               msg.edit('**1coin = 0.01 $**');
+            },30000);
+        });
+    }
+});
+
+
 client.on ("guildMemberAdd", member => {
   
    var role = member.guild.roles.find ("name", "α.м ⇒ мємвєя");
